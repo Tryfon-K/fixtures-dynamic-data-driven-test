@@ -1,0 +1,5 @@
+name,username,password,expect,runTest
+successful login user,tomsmith,SuperSecretPassword!,success,true
+non existent user,nonexistentuser,nonexistentPassword,failureWrongUsername,true
+wrong password user,tomsmith,wrongPassword,failureWrongPassword,true
+wrong username user,wrongUsername,SuperSecretPassword!,failureWrongUsername,true

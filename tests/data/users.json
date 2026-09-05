@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Successful Login User",
+    "username": "tomsmith",
+    "password": "SuperSecretPassword!",
+    "expect": "success",
+    "runTest": true
+  },
+  {
+    "name": "Non-existent User",
+    "username": "nonexistentUser",
+    "password": "nonexistentPassword",
+    "expect": "failureWrongUsername",
+    "runTest": true
+  },
+  {
+    "name": "Wrong Password User",
+    "username": "tomsmith",
+    "password": "wrongPassword",
+    "expect": "failureWrongPassword",
+    "runTest": true
+  },
+  {
+    "name": "Wrong Username User",
+    "username": "wrongUsername",
+    "password": "SuperSecretPassword!",
+    "expect": "failureWrongUsername",
+    "runTest": true
+  }
+]
