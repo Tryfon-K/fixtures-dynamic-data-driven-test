@@ -1,4 +1,4 @@
-import {test, expect} from '../fixtures/base.js';
+import { test, expect } from '../fixtures/test.fixture.js';
 import {readData} from "../utils/unifiedDataReader.js";
 import {messages} from '../data/messages.js';
 
@@ -13,11 +13,10 @@ test.describe('Data Driven Login Tests', () => {
 
         if (String(user.runTest).toLowerCase() !== 'true') return;
 
-        test(`Login Test: ${user.name}`, async ({page, loginPage, homePage}) => {
+        test(`Login Test: ${user.name}`, async ({ page, loginJourney, loginPage, homePage }) => {
 
-            await loginPage.goto();
-            await loginPage.login(user.username, user.password);
-
+           await loginJourney.performLogin(user.username, user.password);
+//TODO put assertions in the page object or wherever it is appropriate, not in the test itself
             if (user.expect === 'success') {
                 await expect(page).toHaveURL('https://the-internet.herokuapp.com/secure');
                 await expect(homePage.successText).toContainText(messages.login.success);
