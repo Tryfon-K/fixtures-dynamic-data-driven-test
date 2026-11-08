@@ -21,19 +21,29 @@ const loginData = readData('tests/data/users.csv') as LoginTestData[];
 test.describe('Data Driven Login Tests', () => {
 
     // take only data where the field runTest is set to true, and run the tests for those users
-    loginData.filter(user => String(user.runTest).toLowerCase() === 'true').forEach(user => {
-        test(`Login Test: ${user.name}`, async ({ page, loginJourney, loginPage, homePage }) => {
+    loginData.filter(user => String(user.runTest).toLowerCase() === 'true').forEach(selectedUser => {
 
-            await loginJourney.performLogin(user.username, user.password);
+        test(`Login Test: ${selectedUser.name}`, async ({ page, loginJourney, loginPage, homePage }) => {
+
+            await loginJourney.performLogin(selectedUser.username, selectedUser.password);
+
             //TODO put assertions in the page object or wherever it is appropriate, not in the test itself
-            if (user.expect === 'success') {
-                await expect(page).toHaveURL('https://the-internet.herokuapp.com/secure');
-                await expect(homePage.successText).toContainText(messages.login.success);
-            } else if (user.expect === 'failureWrongUsername') {
-                await expect(loginPage.invalidLoginError).toContainText(messages.login.wrongUsernameFailure);
-            } else if (user.expect === 'failureWrongPassword') {
-                await expect(loginPage.invalidLoginError).toContainText(messages.login.wrongPasswordFailure);
+            switch (selectedUser.expect) {
+                case 'success':
+                    await expect(page).toHaveURL('https://the-internet.herokuapp.com/secure');
+                    await expect(homePage.successText).toContainText(messages.login.success);
+                    break;
+                case 'failureWrongUsername':
+                    await expect(loginPage.invalidLoginError).toContainText(messages.login.wrongUsernameFailure);
+                    break;
+                case 'failureWrongPassword':
+                    await expect(loginPage.invalidLoginError).toContainText(messages.login.wrongPasswordFailure);
+                    break;
+                default:
+                    throw new Error(`Unknown login expectation in data. Expect: ${selectedUser.expect}`);
+
             }
+            
         })
 
     })
