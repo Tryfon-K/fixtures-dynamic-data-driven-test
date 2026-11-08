@@ -1,22 +1,31 @@
 import { test, expect } from '../fixtures/test.fixture.js';
-import {readData} from "../utils/unifiedDataReader.js";
-import {messages} from '../data/messages.js';
+import { readData } from "../utils/unifiedDataReader.js";
+import { messages } from '../data/messages.js';
 
+//TODO : add types in a dedicated file maybe?
+type LoginTestData = {
+    name: string;
+    username: string;
+    password: string;
+    runTest: string | boolean;
+    expect: 'success' | 'failureWrongUsername' | 'failureWrongPassword';
+};
 
 // Can use both CSV and JSON data files, just uncomment the one you want to use
-const loginData = readData('tests/data/users.csv');
+const loginData = readData('tests/data/users.csv') as LoginTestData[];
 // const loginData = readData('tests/data/users.json');
+
+
+
 
 test.describe('Data Driven Login Tests', () => {
 
-    loginData.forEach((user: any) => {
-
-        if (String(user.runTest).toLowerCase() !== 'true') return;
-
+    // take only data where the field runTest is set to true, and run the tests for those users
+    loginData.filter(user => String(user.runTest).toLowerCase() === 'true').forEach(user => {
         test(`Login Test: ${user.name}`, async ({ page, loginJourney, loginPage, homePage }) => {
 
-           await loginJourney.performLogin(user.username, user.password);
-//TODO put assertions in the page object or wherever it is appropriate, not in the test itself
+            await loginJourney.performLogin(user.username, user.password);
+            //TODO put assertions in the page object or wherever it is appropriate, not in the test itself
             if (user.expect === 'success') {
                 await expect(page).toHaveURL('https://the-internet.herokuapp.com/secure');
                 await expect(homePage.successText).toContainText(messages.login.success);
@@ -26,7 +35,12 @@ test.describe('Data Driven Login Tests', () => {
                 await expect(loginPage.invalidLoginError).toContainText(messages.login.wrongPasswordFailure);
             }
         })
+
     })
 
 
+
 })
+
+
+

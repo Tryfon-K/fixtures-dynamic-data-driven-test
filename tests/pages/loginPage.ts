@@ -3,7 +3,7 @@ import { messages } from '../data/messages.js';
 
 export class LoginPage {
 
-    readonly url = 'https://the-internet.herokuapp.com/login';
+    readonly url = '/login';
     readonly page: Page;
     readonly userName: Locator;
     readonly password: Locator;
