@@ -1,4 +1,4 @@
-import { test as base } from './base.js';
+import { test as base } from './base.fixture.js';
 import { LoginJourney } from '../journeys/loginJourney.js';
 
 type JourneyFixtures = {
