@@ -1,9 +1,9 @@
 import { mergeTests, expect } from '@playwright/test';
-import { test as pageobjects } from '@playwright/test';
-import { test as journeys } from './journey.fixture.js';
+import { test as baseTest } from './base.js';
+import { test as journeyTest } from './journey.fixture.js';
 
-export const test = mergeTests(pageobjects,
-    journeys);
+export const test = mergeTests(baseTest,
+    journeyTest);
 
 
 export { expect }

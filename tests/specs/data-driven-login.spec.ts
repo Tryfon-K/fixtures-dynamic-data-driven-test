@@ -40,7 +40,7 @@ test.describe('Data Driven Login Tests', () => {
                     await expect(loginPage.invalidLoginError).toContainText(messages.login.wrongPasswordFailure);
                     break;
                 default:
-                    throw new Error(`Unknown login expectation in data. Expect: ${selectedUser.expect}`);
+                    throw new Error(`Unknown login expectation in data. selectedUser.expect: ${selectedUser.expect}`);
 
             }
             
