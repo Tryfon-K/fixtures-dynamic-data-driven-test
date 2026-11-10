@@ -19,10 +19,10 @@ test.describe('Data Driven Login Tests', () => {
 
             await loginJourney.performLogin(selectedUser.username, selectedUser.password);
 
-            //TODO put assertions in the page object or wherever it is appropriate, not in the test itself
+            //TODO put assertions an assertion class file, and use that here instead of having the assertions in the test file
             switch (selectedUser.expect) {
                 case 'success':
-                    await expect(page).toHaveURL('https://the-internet.herokuapp.com/secure');
+                    await expect(page).toHaveURL(homePage.url);
                     await expect(homePage.successText).toContainText(messages.login.success);
                     break;
                 case 'failureWrongUsername':
