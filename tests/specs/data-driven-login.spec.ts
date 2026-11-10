@@ -1,21 +1,13 @@
 import { test, expect } from '../fixtures/test.fixture.js';
 import { readData } from "../utils/unifiedDataReader.js";
 import { messages } from '../data/messages.js';
+import type { LoginTestData } from '../types/login.types.js';
 
-//TODO : add types in a dedicated file maybe?
-type LoginTestData = {
-    name: string;
-    username: string;
-    password: string;
-    runTest: string | boolean;
-    expect: 'success' | 'failureWrongUsername' | 'failureWrongPassword';
-};
+
 
 // Can use both CSV and JSON data files, just uncomment the one you want to use
 const loginData = readData('tests/data/users.csv') as LoginTestData[];
 // const loginData = readData('tests/data/users.json');
-
-
 
 
 test.describe('Data Driven Login Tests', () => {
