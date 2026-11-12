@@ -3,7 +3,7 @@ import type {Locator, Page} from "@playwright/test";
 
 export class HomePage {
 
-    readonly url = 'https://the-internet.herokuapp.com/secure';
+    readonly url = '/secure';
     readonly page: Page;
     readonly successText: Locator;
 
