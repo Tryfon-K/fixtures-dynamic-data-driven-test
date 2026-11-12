@@ -10,13 +10,13 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.62.1",
-    "@types/node": "^26.1.2",
-    "typescript": "^7.0.2"
+    "@playwright/test": "1.64.1",
+    "@types/node": "26.1.2",
+    "typescript": "7.0.2"
   },
   "type": "module",
   "dependencies": {
-    "chromium": "^3.0.3",
-    "csv-parse": "^7.0.2"
+    "chromium": "3.0.3",
+    "csv-parse": "7.0.2"
   }
 }
